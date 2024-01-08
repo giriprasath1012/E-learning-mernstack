@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import {useNavigate} from 'react-router-dom'
+import axios from "axios"
 
 function pythonquiz()
 {
@@ -19,6 +20,21 @@ function pythonquiz()
 
     const [submit,setsubmit]=useState(0);
 
+    const [data,setdata]=useState([]);
+    useEffect(() => {
+        try {
+          axios.get('http://localhost:8000/courses/python/quiz')
+            .then((response) => {
+              setdata(response.data);
+              //console.log(response.data);
+            })
+            .catch((error) => {
+              console.error('Error fetching address data:', error);
+            });
+        } catch (error) {
+          console.error('An error occurred:', error);
+        }
+      }, []);
 
    
     function check()
@@ -71,45 +87,55 @@ function pythonquiz()
             <div className="disphead">PYTHON QUIZ</div>
             <div className="dispquiz">
                 
-                <div >
-                    <div >1) Who developed the Python language?</div>
+            <div >
+                    <div >1) {data.map((item, index) => (
+                    item.one
+                    ))}</div>
                     <div>
-                        <input type="radio" name="one" value="a" onChange={e=>setone(e.target.value)}></input><label>Zim Den</label><br></br>
-                        <input type="radio" name="one" value="b" onChange={e=>setone(e.target.value)}></input><label>Guido van Rossum</label><br></br>
-                        <input type="radio" name="one" value="c" onChange={e=>setone(e.target.value)}></input><label>Wick van Rossum</label>
+                        <input type="radio" name="one" value="a" onChange={e=>setone(e.target.value)}></input><label>{data.map((item, index) => (item.one_a ))}</label><br></br>
+                        <input type="radio" name="one" value="b" onChange={e=>setone(e.target.value)}></input><label>{data.map((item, index) => (item.one_b ))}</label><br></br>
+                        <input type="radio" name="one" value="c" onChange={e=>setone(e.target.value)}></input><label>{data.map((item, index) => (item.one_c ))}</label>
                     </div>
                     <br></br>
 
                     <div >
-                    <div >2) What is the maximum possible length of an identifier?</div>
+                    <div >2) {data.map((item, index) => (
+                    item.two
+                    ))}</div>
                     <div>
-                        <input type="radio" name="two" value="a" onChange={e=>settwo(e.target.value)}></input><label>16</label><br></br>
-                        <input type="radio" name="two" value="b" onChange={e=>settwo(e.target.value)}></input><label>32</label><br></br>
-                        <input type="radio" name="two" value="c" onChange={e=>settwo(e.target.value)}></input><label>None of these above</label>
+                        <input type="radio" name="two" value="a" onChange={e=>settwo(e.target.value)}></input><label>{data.map((item, index) => (item.two_a ))}</label><br></br>
+                        <input type="radio" name="two" value="b" onChange={e=>settwo(e.target.value)}></input><label>{data.map((item, index) => (item.two_b ))}</label><br></br>
+                        <input type="radio" name="two" value="c" onChange={e=>settwo(e.target.value)}></input><label>{data.map((item, index) => (item.two_c ))}</label>
                     </div>
                     <br></br>
 
-                    <div >3) Which of the following is correctly evaluated for this function? pow(x,y,z) </div>
+                    <div >3){data.map((item, index) => (
+                    item.three
+                    ))}</div>
                     <div>
-                        <input type="radio" name="three" value="a" onChange={e=>setthree(e.target.value)}></input><label>(x**y) % z</label><br></br>
-                        <input type="radio" name="three" value="b" onChange={e=>setthree(e.target.value)}></input><label>(x / y) / z</label><br></br>
-                        <input type="radio" name="three" value="c" onChange={e=>setthree(e.target.value)}></input><label>(x**y) / z</label>
+                        <input type="radio" name="three" value="a" onChange={e=>setthree(e.target.value)}></input><label>{data.map((item, index) => (item.three_a ))}</label><br></br>
+                        <input type="radio" name="three" value="b" onChange={e=>setthree(e.target.value)}></input><label>{data.map((item, index) => (item.three_b ))}</label><br></br>
+                        <input type="radio" name="three" value="c" onChange={e=>setthree(e.target.value)}></input><label>{data.map((item, index) => (item.three_c ))}</label>
                     </div>
                     <br></br>
 
-                    <div >4)Which one of the following syntaxes is the correct syntax to read from a simple text file stored in ''d:\java.txt''?</div>
+                    <div >4) {data.map((item, index) => (
+                    item.four
+                    ))} </div>
                     <div>
-                        <input type="radio" name="four" value="a" onChange={e=>setfour(e.target.value)}></input><label>Infile = open(''d:\java.txt'',''r'')</label><br></br>
-                        <input type="radio" name="four" value="b" onChange={e=>setfour(e.target.value)}></input><label>Infile = open.file(''d:\\java.txt'',''r'')</label><br></br>
-                        <input type="radio" name="four" value="c" onChange={e=>setfour(e.target.value)}></input><label>Infile = open(''d:\\java.txt'', ''r'')</label>
+                        <input type="radio" name="four" value="a" onChange={e=>setfour(e.target.value)}></input><label>{data.map((item, index) => (item.four_a ))}</label><br></br>
+                        <input type="radio" name="four" value="b" onChange={e=>setfour(e.target.value)}></input><label>{data.map((item, index) => (item.four_b ))}</label><br></br>
+                        <input type="radio" name="four" value="c" onChange={e=>setfour(e.target.value)}></input><label>{data.map((item, index) => (item.four_c ))}</label>
                     </div>
                     <br></br>
 
-                    <div >5) Which of the following option is not a core data type in the python language?</div>
+                    <div >5) {data.map((item, index) => (
+                    item.five
+                    ))}</div>
                     <div>
-                        <input type="radio" name="five" value="a" onChange={e=>setfive(e.target.value)}></input><label>Dictionary</label><br></br>
-                        <input type="radio" name="five" value="b" onChange={e=>setfive(e.target.value)}></input><label>Class</label><br></br>
-                        <input type="radio" name="five" value="c" onChange={e=>setfive(e.target.value)}></input><label>Lists</label>
+                        <input type="radio" name="five" value="a" onChange={e=>setfive(e.target.value)}></input><label>{data.map((item, index) => (item.five_a ))}</label><br></br>
+                        <input type="radio" name="five" value="b" onChange={e=>setfive(e.target.value)}></input><label>{data.map((item, index) => (item.five_b ))}</label><br></br>
+                        <input type="radio" name="five" value="c" onChange={e=>setfive(e.target.value)}></input><label>{data.map((item, index) => (item.five_c ))}</label>
                     </div>
                     <br></br>
                 </div>
@@ -126,12 +152,14 @@ function pythonquiz()
                 <div className="res hm2">
                     <div className="txt">
                         Result
+                        <center>
                         <div className="res1">
                             <div className="pt-4">Your Score</div>
                         <div className="res1txt">{finalscore} / 5</div>
                         </div>
-
-                        <div className="res2 w-auto ">
+                        </center>
+                        <center>
+                        <div className="res2  ">
                         <div className="pt-4 text-cyan-500">Correct Answer</div>
                         <div>
                             <p>1)Guido van Rossum</p>
@@ -142,7 +170,7 @@ function pythonquiz()
                         </div>
 
                         </div>
-
+                        </center>
                         <div>
                             <button className="btn" onClick={back}>Back</button>
                         </div>

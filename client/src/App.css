@@ -147,8 +147,9 @@
 }
 
 .item:hover{
-  background-color: lightgrey;
+  
   transform: scale(115%);
+  animation: bgtrans 1s linear infinite;
 }
 
 .image{
@@ -201,19 +202,18 @@
 }
 
 .res{
-  display: flex; 
+  
   text-align: center; 
-  justify-content: center; 
+  
   background-color: aqua;
   height: 600px;
 }
 
 .res1{
   margin: 20px;
-  margin-left: 90px;
+  
   text-align: center;
-  justify-content: center; 
-  align-items: center; 
+  
   background-color: #e9cb6b;
   border-radius: 10px; 
   height: 150px;
@@ -223,18 +223,16 @@
 .res2{
   margin: 20px;
   text-align: center;
-  justify-content: center; 
-  align-items: center; 
+  padding: 10px 20px 10px 20px;
   background-color: #e9cb6b;
   border-radius: 10px; 
   height: 250px;
-  width: 200px;
+  width: max-content;
 }
 .res1txt{
   margin-top: 20px;
   text-align: center;
-  justify-content: center; 
-  align-items: center; 
+  
   color: cyan;
 }
 
@@ -255,7 +253,7 @@
   background: url("img4.jpg") no-repeat;
   background-size: cover;
   background-position: center;
-  animation: bgtrans 5s linear infinite;
+  animation: bgtrans 7s linear infinite;
 }
 
 @keyframes bgtrans{
@@ -272,7 +270,7 @@
   width: 420px;
   
   background: transparent;
-  border: 2px solid rgba(255, 255, 255, .2);
+  border: 2px solid rgb(255, 255, 255,0.5);
   backdrop-filter: blur(9px);
   color: #fff;
   border-radius: 12px;

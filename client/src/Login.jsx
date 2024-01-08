@@ -1,72 +1,90 @@
-
-import React, { useEffect, useState } from "react"
-import axios from "axios"
-import { useNavigate, Link } from "react-router-dom"
-
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+    const history = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    const history=useNavigate();
-
-    const [email,setEmail]=useState('')
-    const [password,setPassword]=useState('')
-
-    async function submit(e){
+    const submit = async (e) => {
         e.preventDefault();
 
-        try{
+        try {
+            const response = await axios.post("http://localhost:8000/login", {
+                email,
+                password,
+            });
 
-            await axios.post("http://localhost:8000/login",{
-                email,password
-            })
-            .then(res=>{
-                if(res.data=="exist"){
-
-                    history("/courses",{state:{id:email}})
-                    //alert("Successfully Login")
-                }
-                else if(res.data=="notexist"){
-                    alert("User not exist")
-                }
-            })
-            .catch(e=>{
-                alert("Please enter correct details")
-                console.log(e);
-            })
-
-        }
-        catch(e){
+            if (response.data === "exist") {
+                history("/courses", { state: { id: email } });
+                //alert("Successfully Login")
+            } else if (response.data === "notexist") {
+                alert("User does not exist");
+            }
+        } catch (e) {
+            alert("Please enter correct details");
             console.log(e);
-
         }
+    };
 
-    }
-
+    const forget = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8000/login/${email}`);
+            console.log(response.data);
+            
+            alert("Password reset instructions sent to your email.");
+        } catch (error) {
+            alert("Error sending password reset instructions");
+            console.error("Error fetching data:", error);
+        }
+    };
 
     return (
-       <section className="section">
-        <div class="body">
-        <div class="wrapper">
-        <form action="">
-          <h1>Login</h1>
-          <div class="input-box">
-            <input type="text" onChange={(e) => { setEmail(e.target.value) }} placeholder="Email" required/>
-            <i class='bx bxs-user'></i>
-          </div>
-          <div class="input-box">
-            <input type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Password" required/>
-            <i class='bx bxs-lock-alt' ></i>
-          </div>
-         
-          <button type="submit" class="btn" onClick={submit} >Login</button>
-          <div class="register-link">
-            <p>Dont have an account? <a href="/register">Register</a></p>
-          </div>
-        </form>
-      </div>
-      </div>
-      </section>
-    )
+        <section className="section">
+            <div className="body">
+                <div className="wrapper">
+                    <form>
+                        <h1>Login</h1>
+                        <div className="input-box">
+                            <input
+                                type="text"
+                                onChange={(e) => {
+                                    setEmail(e.target.value);
+                                }}
+                                placeholder="Email"
+                                required
+                            />
+                            <i className="bx bxs-user"></i>
+                        </div>
+                        <div className="input-box">
+                            <input
+                                type="password"
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                }}
+                                placeholder="Password"
+                                required
+                            />
+                            <i className="bx bxs-lock-alt"></i>
+                        </div>
+
+                        <button type="submit" className="btn" onClick={submit}>
+                            Login
+                        </button>
+                        <div className="register-link">
+                            <p>
+                                Don't have an account? <a href="/register">Register</a>
+                            </p>
+                        </div>
+                        <div className="register-link">
+                            <a onClick={forget}>Forgot Password</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    );
 }
 
-export default Login
+export default Login;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {useNavigate} from 'react-router-dom'
 import axios from "axios"
 
@@ -20,7 +20,21 @@ function Dsaquiz()
 
     const [submit,setsubmit]=useState(0);
 
-   
+    const [data,setdata]=useState([]);
+    useEffect(() => {
+        try {
+          axios.get('http://localhost:8000/courses/dsa/quiz')
+            .then((response) => {
+              setdata(response.data);
+              console.log(response.data);
+            })
+            .catch((error) => {
+              console.error('Error fetching address data:', error);
+            });
+        } catch (error) {
+          console.error('An error occurred:', error);
+        }
+      }, []);
 
     
     function check()
@@ -74,44 +88,54 @@ function Dsaquiz()
             <div className="dispquiz">
                 
                 <div >
-                    <div >1) What is a data structure?</div>
+                    <div >1) {data.map((item, index) => (
+                    item.one
+                    ))}</div>
                     <div>
-                        <input type="radio" name="one" value="a" onChange={e=>setone(e.target.value)}></input><label>A programming language</label><br></br>
-                        <input type="radio" name="one" value="b" onChange={e=>setone(e.target.value)}></input><label>A way to store and organize data</label><br></br>
-                        <input type="radio" name="one" value="c" onChange={e=>setone(e.target.value)}></input><label>A type of computer hardware</label>
+                        <input type="radio" name="one" value="a" onChange={e=>setone(e.target.value)}></input><label>{data.map((item, index) => (item.one_a ))}</label><br></br>
+                        <input type="radio" name="one" value="b" onChange={e=>setone(e.target.value)}></input><label>{data.map((item, index) => (item.one_b ))}</label><br></br>
+                        <input type="radio" name="one" value="c" onChange={e=>setone(e.target.value)}></input><label>{data.map((item, index) => (item.one_c ))}</label>
                     </div>
                     <br></br>
 
                     <div >
-                    <div >2) Function call is an application of ?</div>
+                    <div >2) {data.map((item, index) => (
+                    item.two
+                    ))}</div>
                     <div>
-                        <input type="radio" name="two" value="a" onChange={e=>settwo(e.target.value)}></input><label>Stack</label><br></br>
-                        <input type="radio" name="two" value="b" onChange={e=>settwo(e.target.value)}></input><label>Queue</label><br></br>
-                        <input type="radio" name="two" value="c" onChange={e=>settwo(e.target.value)}></input><label>Tree</label>
+                        <input type="radio" name="two" value="a" onChange={e=>settwo(e.target.value)}></input><label>{data.map((item, index) => (item.two_a ))}</label><br></br>
+                        <input type="radio" name="two" value="b" onChange={e=>settwo(e.target.value)}></input><label>{data.map((item, index) => (item.two_b ))}</label><br></br>
+                        <input type="radio" name="two" value="c" onChange={e=>settwo(e.target.value)}></input><label>{data.map((item, index) => (item.two_c ))}</label>
                     </div>
                     <br></br>
 
-                    <div >3) When the user tries to delete the element from the empty stack then the condition is said to be ?</div>
+                    <div >3){data.map((item, index) => (
+                    item.three
+                    ))}</div>
                     <div>
-                        <input type="radio" name="three" value="a" onChange={e=>setthree(e.target.value)}></input><label>Overflow</label><br></br>
-                        <input type="radio" name="three" value="b" onChange={e=>setthree(e.target.value)}></input><label>Underflow</label><br></br>
-                        <input type="radio" name="three" value="c" onChange={e=>setthree(e.target.value)}></input><label>None of these above</label>
+                        <input type="radio" name="three" value="a" onChange={e=>setthree(e.target.value)}></input><label>{data.map((item, index) => (item.three_a ))}</label><br></br>
+                        <input type="radio" name="three" value="b" onChange={e=>setthree(e.target.value)}></input><label>{data.map((item, index) => (item.three_b ))}</label><br></br>
+                        <input type="radio" name="three" value="c" onChange={e=>setthree(e.target.value)}></input><label>{data.map((item, index) => (item.three_c ))}</label>
                     </div>
                     <br></br>
 
-                    <div >4) Trees can be represented in </div>
+                    <div >4) {data.map((item, index) => (
+                    item.four
+                    ))} </div>
                     <div>
-                        <input type="radio" name="four" value="a" onChange={e=>setfour(e.target.value)}></input><label>Linked List</label><br></br>
-                        <input type="radio" name="four" value="b" onChange={e=>setfour(e.target.value)}></input><label>Array</label><br></br>
-                        <input type="radio" name="four" value="c" onChange={e=>setfour(e.target.value)}></input><label>All the above</label>
+                        <input type="radio" name="four" value="a" onChange={e=>setfour(e.target.value)}></input><label>{data.map((item, index) => (item.four_a ))}</label><br></br>
+                        <input type="radio" name="four" value="b" onChange={e=>setfour(e.target.value)}></input><label>{data.map((item, index) => (item.four_b ))}</label><br></br>
+                        <input type="radio" name="four" value="c" onChange={e=>setfour(e.target.value)}></input><label>{data.map((item, index) => (item.four_c ))}</label>
                     </div>
                     <br></br>
 
-                    <div >5) Which of the following is an example of a cyclic graph?</div>
+                    <div >5) {data.map((item, index) => (
+                    item.five
+                    ))}</div>
                     <div>
-                        <input type="radio" name="five" value="a" onChange={e=>setfive(e.target.value)}></input><label>Complete Graph</label><br></br>
-                        <input type="radio" name="five" value="b" onChange={e=>setfive(e.target.value)}></input><label>Trees</label><br></br>
-                        <input type="radio" name="five" value="c" onChange={e=>setfive(e.target.value)}></input><label>Directed acyclic graph</label>
+                        <input type="radio" name="five" value="a" onChange={e=>setfive(e.target.value)}></input><label>{data.map((item, index) => (item.five_a ))}</label><br></br>
+                        <input type="radio" name="five" value="b" onChange={e=>setfive(e.target.value)}></input><label>{data.map((item, index) => (item.five_b ))}</label><br></br>
+                        <input type="radio" name="five" value="c" onChange={e=>setfive(e.target.value)}></input><label>{data.map((item, index) => (item.five_c ))}</label>
                     </div>
                     <br></br>
                 </div>
@@ -128,12 +152,14 @@ function Dsaquiz()
                 <div className="res hm2">
                     <div className="txt">
                         Result
+                        <center>
                         <div className="res1">
                             <div className="pt-4">Your Score</div>
                         <div className="res1txt">{finalscore} / 5</div>
                         </div>
-
-                        <div className="res2 w-auto ">
+                        </center>
+                        <center>
+                        <div className="res2 ">
                         <div className="pt-4 text-cyan-500">Correct Answer</div>
                         <div>
                             <p>1)A way to store and organize data</p>
@@ -144,6 +170,7 @@ function Dsaquiz()
                         </div>
 
                         </div>
+                        </center>
 
                         <div>
                             <button className="btn" onClick={back}>Back</button>

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router-dom'
+import axios from 'axios';
 import NavBar from '../Navbar'
 function dsa()
 {
@@ -34,6 +35,22 @@ function dsa()
     {
         navigate('/courses/dsa/quiz')
     };
+
+    const [one, setone] = useState([]);
+
+  useEffect(() => {
+    try {
+      axios.get('http://localhost:8000/courses/dsa')
+        .then((response) => {
+          setone(response.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching address data:', error);
+        });
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  }, []);
    
     return (
         <>
@@ -48,9 +65,9 @@ function dsa()
                 { intro ?
                 (
                 <div className="disptxt">
-                Data Structures (DS) tutorial provides basic and advanced concepts of Data Structure. Our Data Structure tutorial is designed for beginners and professionals.
-                Data Structure is a way to store and organize data so that it can be used efficiently.
-                Our Data Structure tutorial includes all topics of Data Structure such as Array, Pointer, Structure, Linked List, Stack, Queue, Graph, Searching, Sorting, Programs, etc.
+                {one.map((item, index) => (
+              <div key={index}>{item.intro}</div>
+            ))}
                 </div>
         
                 ):
@@ -61,7 +78,9 @@ function dsa()
                 { stack ?
                 (
                 <div className="disptxt">
-                    Stacks and queues are fundamental data structures in computer science and are used to manage collections of data in various algorithms and applications. Here's an overview of stack and queue theory:
+                    {one.map((item, index) => (
+                    <div key={index}>{item.stack}</div>
+                    ))}
                     <h1 className="text-2xl  text-blue-700">Stack</h1>
                     Definition: A stack is a linear data structure that follows the Last-In-First-Out (LIFO) principle. This means that the last element added to the stack is the first one to be removed.
                     <br></br>
@@ -89,7 +108,9 @@ function dsa()
                 { llist ?
                 (
                 <div className="disptxt">
-                    A linked list is a fundamental data structure used in computer science to organize and store a collection of elements. It is a linear data structure where each element, called a "node," consists of two parts: a data field to store the actual data and a reference (or link) to the next node in the sequence. Linked lists come in various forms, but the most common types are singly linked lists and doubly linked lists. Here are some basic concepts related to linked lists:
+                     {one.map((item, index) => (
+                    <div key={index}>{item.linkedlist}</div>
+                    ))}
                     <br></br>
                     <br></br>
                     Head: The head is a reference to the first node in the linked list. It allows you to access the list's elements by traversing from the head to subsequent nodes.
@@ -122,7 +143,9 @@ function dsa()
                 { tree ?
                 (
                 <div className="disptxt">
-                    Trees are fundamental data structures in computer science and are used to organize and structure data hierarchically. They consist of nodes connected by edges, and they have a root node at the top from which all other nodes descend. Each node can have zero or more child nodes, and a node with no children is called a leaf node. Here are some basic concepts related to trees:
+                    {one.map((item, index) => (
+                    <div key={index}>{item.tree}</div>
+                    ))}
                     <br></br>
                     <li>Root: The root is the topmost node of the tree, from which all other nodes descend. It serves as the starting point for traversing the tree.</li>
                     <li>Parent: A node in a tree can have child nodes. The node from which a particular node descends is called its parent node.</li>
@@ -153,7 +176,9 @@ function dsa()
                 { graph ?
                 (
                 <div className="disptxt">
-                    Graphs are a fundamental data structure in computer science and mathematics. They are used to model and represent relationships between objects or entities. In a graph, a set of nodes (or vertices) are connected by edges. Here are some basic concepts related to graphs:
+                    {one.map((item, index) => (
+                    <div key={index}>{item.graph}</div>
+                    ))}
                     <br></br>
                     <li>Node (Vertex): A node, also known as a vertex, represents an entity or an element in the graph. Nodes can have labels or values associated with them.</li>
                     <li>Edge: An edge is a connection between two nodes in the graph. Edges can be directed (have a specific direction) or undirected (bi-directional).</li>

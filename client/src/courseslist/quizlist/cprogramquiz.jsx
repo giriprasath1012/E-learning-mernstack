@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import {useNavigate} from 'react-router-dom'
+import axios from "axios"
 
 function cprogramquiz()
 {
@@ -20,6 +21,21 @@ function cprogramquiz()
     const [submit,setsubmit]=useState(0);
 
 
+    const [data,setdata]=useState([]);
+    useEffect(() => {
+        try {
+          axios.get('http://localhost:8000/courses/cprogram/quiz')
+            .then((response) => {
+              setdata(response.data);
+              console.log(response.data);
+            })
+            .catch((error) => {
+              console.error('Error fetching address data:', error);
+            });
+        } catch (error) {
+          console.error('An error occurred:', error);
+        }
+      }, []);
    
     function check()
     {
@@ -71,45 +87,55 @@ function cprogramquiz()
             <div className="disphead">C PROGRAMMING QUIZ</div>
             <div className="dispquiz">
                 
-                <div >
-                    <div >1) What is the output of this statement "printf("%d", (a++))"?</div>
+            <div >
+                    <div >1) {data.map((item, index) => (
+                    item.one
+                    ))}</div>
                     <div>
-                        <input type="radio" name="one" value="a" onChange={e=>setone(e.target.value)}></input><label>The current value of a</label><br></br>
-                        <input type="radio" name="one" value="b" onChange={e=>setone(e.target.value)}></input><label>The value of (a + 1)</label><br></br>
-                        <input type="radio" name="one" value="c" onChange={e=>setone(e.target.value)}></input><label>Error message</label>
+                        <input type="radio" name="one" value="a" onChange={e=>setone(e.target.value)}></input><label>{data.map((item, index) => (item.one_a ))}</label><br></br>
+                        <input type="radio" name="one" value="b" onChange={e=>setone(e.target.value)}></input><label>{data.map((item, index) => (item.one_b ))}</label><br></br>
+                        <input type="radio" name="one" value="c" onChange={e=>setone(e.target.value)}></input><label>{data.map((item, index) => (item.one_c ))}</label>
                     </div>
                     <br></br>
 
                     <div >
-                    <div >2) A pointer is a memory address. Suppose the pointer variable has p address 1000, and that p is declared to have type int*, and an int is 4 bytes long. What address is represented by expression p + 2?</div>
+                    <div >2) {data.map((item, index) => (
+                    item.two
+                    ))}</div>
                     <div>
-                        <input type="radio" name="two" value="a" onChange={e=>settwo(e.target.value)}></input><label>1002</label><br></br>
-                        <input type="radio" name="two" value="b" onChange={e=>settwo(e.target.value)}></input><label>1004</label><br></br>
-                        <input type="radio" name="two" value="c" onChange={e=>settwo(e.target.value)}></input><label>1008</label>
+                        <input type="radio" name="two" value="a" onChange={e=>settwo(e.target.value)}></input><label>{data.map((item, index) => (item.two_a ))}</label><br></br>
+                        <input type="radio" name="two" value="b" onChange={e=>settwo(e.target.value)}></input><label>{data.map((item, index) => (item.two_b ))}</label><br></br>
+                        <input type="radio" name="two" value="c" onChange={e=>settwo(e.target.value)}></input><label>{data.map((item, index) => (item.two_c ))}</label>
                     </div>
                     <br></br>
 
-                    <div >3) What is the maximum number of characters that can be held in the string variable char address line [40]? </div>
+                    <div >3){data.map((item, index) => (
+                    item.three
+                    ))}</div>
                     <div>
-                        <input type="radio" name="three" value="a" onChange={e=>setthree(e.target.value)}></input><label>39</label><br></br>
-                        <input type="radio" name="three" value="b" onChange={e=>setthree(e.target.value)}></input><label>40</label><br></br>
-                        <input type="radio" name="three" value="c" onChange={e=>setthree(e.target.value)}></input><label>41</label>
+                        <input type="radio" name="three" value="a" onChange={e=>setthree(e.target.value)}></input><label>{data.map((item, index) => (item.three_a ))}</label><br></br>
+                        <input type="radio" name="three" value="b" onChange={e=>setthree(e.target.value)}></input><label>{data.map((item, index) => (item.three_b ))}</label><br></br>
+                        <input type="radio" name="three" value="c" onChange={e=>setthree(e.target.value)}></input><label>{data.map((item, index) => (item.three_c ))}</label>
                     </div>
                     <br></br>
 
-                    <div >4) Give the following declarations and an assignment statement. Which one is equivalent to the expression str [4]? char str[80];  char * p;  p = str;  </div>
+                    <div >4) {data.map((item, index) => (
+                    item.four
+                    ))} </div>
                     <div>
-                        <input type="radio" name="four" value="a" onChange={e=>setfour(e.target.value)}></input><label>*p + 4</label><br></br>
-                        <input type="radio" name="four" value="b" onChange={e=>setfour(e.target.value)}></input><label>*(p + 4)</label><br></br>
-                        <input type="radio" name="four" value="c" onChange={e=>setfour(e.target.value)}></input><label>p + 4</label>
+                        <input type="radio" name="four" value="a" onChange={e=>setfour(e.target.value)}></input><label>{data.map((item, index) => (item.four_a ))}</label><br></br>
+                        <input type="radio" name="four" value="b" onChange={e=>setfour(e.target.value)}></input><label>{data.map((item, index) => (item.four_b ))}</label><br></br>
+                        <input type="radio" name="four" value="c" onChange={e=>setfour(e.target.value)}></input><label>{data.map((item, index) => (item.four_c ))}</label>
                     </div>
                     <br></br>
 
-                    <div >5) Which of the following function is used to write the integer in a file?</div>
+                    <div >5) {data.map((item, index) => (
+                    item.five
+                    ))}</div>
                     <div>
-                        <input type="radio" name="five" value="a" onChange={e=>setfive(e.target.value)}></input><label>putw()</label><br></br>
-                        <input type="radio" name="five" value="b" onChange={e=>setfive(e.target.value)}></input><label>getw()</label><br></br>
-                        <input type="radio" name="five" value="c" onChange={e=>setfive(e.target.value)}></input><label>f_int()</label>
+                        <input type="radio" name="five" value="a" onChange={e=>setfive(e.target.value)}></input><label>{data.map((item, index) => (item.five_a ))}</label><br></br>
+                        <input type="radio" name="five" value="b" onChange={e=>setfive(e.target.value)}></input><label>{data.map((item, index) => (item.five_b ))}</label><br></br>
+                        <input type="radio" name="five" value="c" onChange={e=>setfive(e.target.value)}></input><label>{data.map((item, index) => (item.five_c ))}</label>
                     </div>
                     <br></br>
                 </div>
@@ -126,12 +152,15 @@ function cprogramquiz()
                 <div className="res hm2">
                     <div className="txt">
                         Result
+                        <center>
                         <div className="res1">
                             <div className="pt-4">Your Score</div>
                         <div className="res1txt">{finalscore} / 5</div>
                         </div>
+                        </center>
 
-                        <div className="res2 w-auto ">
+                        <center>
+                        <div className="res2">
                         <div className="pt-4 text-cyan-500">Correct Answer</div>
                         <div>
                             <p>1)The current value of a</p>
@@ -142,7 +171,7 @@ function cprogramquiz()
                         </div>
 
                         </div>
-
+                        </center>
                         <div>
                             <button className="btn" onClick={back}>Back</button>
                         </div>
